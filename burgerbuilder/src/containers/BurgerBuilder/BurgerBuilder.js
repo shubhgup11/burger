@@ -20,7 +20,8 @@ class BurgerBuilder extends Component
                     cheese:0,
                     meat:0},
         totalPrice:4,
-        modalShow:false
+        modalShow:false,
+        backdropshow:false
 
     };
     subrtactIngredientHandler=(type)=>
@@ -61,19 +62,25 @@ class BurgerBuilder extends Component
     {
         this.setState((prevState,props)=>
         {
-            return {modalShow:!prevState.modalShow};
+            return {modalShow:!prevState.modalShow,backdropshow:!prevState.backdropshow};
         })
         
     }
+    backdropCLickHandler=()=>
+    {
+        this.orderNowClickHandler();
+    }
     render()
     {
+        
         let modal=null;
         if(this.state.modalShow)
             modal=
             <React.Fragment>
-            <BackDrop clicked={this.orderNowClickHandler}/>
+            <BackDrop clicked={this.backdropCLickHandler} show={this.state.backdropshow}/>
             <Modal ingredients={this.state.ingredient} DangerClick={this.orderNowClickHandler}
-             SuccessClick={this.orderNowClickHandler}></Modal>
+             SuccessClick={this.orderNowClickHandler}
+             price={this.state.totalPrice}></Modal>
             </React.Fragment>;
         // console.log(modal);
         console.log(this.state.totalPrice);

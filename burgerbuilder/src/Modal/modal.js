@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './modal.module.css';
+// import {Button} from 'reactstrap'
 
 
 const Modal=(props)=>
@@ -23,9 +24,11 @@ const Modal=(props)=>
             <h3>Order Summary</h3>
             <p>Burger has the following ingredient</p>
             {ListJSX}
+            <p>Total Price is : {props.price}</p>
             <p>Are you sure you want to checkout</p>
             <button  className={[classes.Button,classes.Danger].join(" ") } onClick={props.DangerClick}>Cancel</button>
             <button className={[classes.Button,classes.Success].join(" ")} onClick={props.SuccessClick}>Order Now  </button>
+            
         </div>
     )
 }
