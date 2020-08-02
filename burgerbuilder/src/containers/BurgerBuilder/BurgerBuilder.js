@@ -1,8 +1,8 @@
 import React ,{Component} from 'react';
 import Burger from '../.././Burger/Burger';
-import BuildControls from '../../Burger/BuildControls/BuildControls'
-import Modal from '../../Modal/modal'
-import BackDrop from '../../Burger/Backdrop/Backdrop'
+import BuildControls from '../../Burger/BuildControls/BuildControls';
+import Modal from '../../Modal/modal';
+import BackDrop from '../../Burger/Backdrop/Backdrop';
 
 const INGREDIENTPRICE={
     salad:0.5,
@@ -21,7 +21,8 @@ class BurgerBuilder extends Component
                     meat:0},
         totalPrice:4,
         modalShow:false,
-        backdropshow:false
+        backdropshow:false,
+        loading:false
 
     };
     subrtactIngredientHandler=(type)=>
@@ -58,17 +59,42 @@ class BurgerBuilder extends Component
     }
     
 
+    ContinueClickHandler=()=>
+    {
+        let queryParams=[];
+        for(let i in this.state.ingredient)
+        {
+            queryParams.push(encodeURIComponent(i)+'='+encodeURIComponent(this.state.ingredient[i]))
+        }
+        queryParams.push(encodeURIComponent('price')+'='+encodeURIComponent(this.state.totalPrice))
+        let queryString=queryParams.join('&');
+        console.log(queryString)
+        this.props.history.push({
+            pathname:'/checkout',
+            search: '?'+queryString
+        });
+
+        
+        
+    }
+    CancelClickHandler=()=>
+    {
+        this.setState((prevState,props)=>
+        {
+            return {modalShow:!prevState.modalShow,backdropshow:!prevState.backdropshow};
+        });
+        
+    }
     orderNowClickHandler=()=>
     {
         this.setState((prevState,props)=>
         {
             return {modalShow:!prevState.modalShow,backdropshow:!prevState.backdropshow};
-        })
-        
+        });
     }
     backdropCLickHandler=()=>
     {
-        this.orderNowClickHandler();
+        this.CancelClickHandler();
     }
     render()
     {
@@ -78,12 +104,13 @@ class BurgerBuilder extends Component
             modal=
             <React.Fragment>
             <BackDrop clicked={this.backdropCLickHandler} show={this.state.backdropshow}/>
-            <Modal ingredients={this.state.ingredient} DangerClick={this.orderNowClickHandler}
-             SuccessClick={this.orderNowClickHandler}
-             price={this.state.totalPrice}></Modal>
+            <Modal ingredients={this.state.ingredient} DangerClick={this.CancelClickHandler}
+             SuccessClick={this.ContinueClickHandler}
+             price={this.state.totalPrice} showLoader={this.state.loading}></Modal>
             </React.Fragment>;
         // console.log(modal);
         console.log(this.state.totalPrice);
+        console.log(this.props);
         const disabledInfo={...this.state.ingredient};
         for (let key in disabledInfo)
         {

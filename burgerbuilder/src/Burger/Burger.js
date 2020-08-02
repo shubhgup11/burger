@@ -4,6 +4,8 @@ import BurgerIngredient from './BurgerIngredient/BurgerIngredient'
 
 const Burger= (props)=>
 {
+    // console.log("in burger");
+    // console.log(props.ingredient);
     const ingredientList=Object.keys(props.ingredient);
     let ingredientListJSX=ingredientList.map((ingr)=>{
         return ([...Array(props.ingredient[ingr])].map((_,i)=>

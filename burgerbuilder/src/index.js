@@ -4,10 +4,16 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from'axios';
+import { BrowserRouter } from 'react-router-dom';
+
+axios.defaults.baseURL='https://burger-app-testt.firebaseio.com/';
 
 ReactDOM.render(
   <React.StrictMode>
+    <BrowserRouter>
     <App />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

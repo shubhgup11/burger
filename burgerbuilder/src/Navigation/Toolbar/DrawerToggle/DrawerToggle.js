@@ -5,7 +5,7 @@ import classes from './DrawerToggle.module.css';
 const DrawerToggle=(props)=>
 {
     return (
-        <div class={classes.DrawerToggle} onClick={props.ToggleCLickHandler}>
+        <div className={classes.DrawerToggle} onClick={props.ToggleCLickHandler}>
             <div></div>
             <div></div>
             <div></div>
