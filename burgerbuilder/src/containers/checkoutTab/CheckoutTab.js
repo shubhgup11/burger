@@ -18,35 +18,35 @@ class CheckoutTab extends Component
     cancelClickHandler = ()=>
     {
         this.props.history.goBack();
-        console.log("cancelClicked");
+        // console.log("cancelClicked");
     }
     continueClickHandler=()=>
     {
-        console.log(this.props);
-        console.log("form tp be displayed");
+        // console.log(this.props);
+        // console.log("form tp be displayed");
         this.props.history.push("/checkout/form");
     }
     componentDidMount()
     {
-        console.log(this.props);
+        // console.log(this.props);
         const query=new URLSearchParams(this.props.location.search)
-        console.log(query);
+        // console.log(query);
         const ingredient={}
         let totalPrice=0;
         totalPrice=+query.get('price');
         for(let p of query)
         {
-            console.log(p);
+            // console.log(p);
             if(p[0]==='price')
                 break;
             ingredient[p[0]]=+p[1];
             
         }
-        console.log(ingredient);
+        // console.log(ingredient);
         this.setState({ingredient:ingredient,
                         totalPrice:totalPrice},()=>{
-                            console.log(this.state.ingredient);
-                            console.log(this.state.totalPrice);
+                            // console.log(this.state.ingredient);
+                            // console.log(this.state.totalPrice);
                         });
         // console.log(this.state);
         

@@ -13,14 +13,14 @@ class Orders extends Component
     {
         let orderListTemp=[];
     axios.get('/orders.json').then((res)=>{
-        console.log(res.data);
+        // console.log(res.data);
         for (let key in res.data)
         {
             orderListTemp.push({...res.data[key],key:key})
         }
         this.setState({orderList:orderListTemp,
         loading:false});
-        console.log(orderListTemp);
+        // console.log(orderListTemp);
     
     })
     }

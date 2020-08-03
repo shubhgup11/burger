@@ -68,7 +68,7 @@ class BurgerBuilder extends Component
         }
         queryParams.push(encodeURIComponent('price')+'='+encodeURIComponent(this.state.totalPrice))
         let queryString=queryParams.join('&');
-        console.log(queryString)
+        // console.log(queryString)
         this.props.history.push({
             pathname:'/checkout',
             search: '?'+queryString
@@ -109,8 +109,8 @@ class BurgerBuilder extends Component
              price={this.state.totalPrice} showLoader={this.state.loading}></Modal>
             </React.Fragment>;
         // console.log(modal);
-        console.log(this.state.totalPrice);
-        console.log(this.props);
+        // console.log(this.state.totalPrice);
+        // console.log(this.props);
         const disabledInfo={...this.state.ingredient};
         for (let key in disabledInfo)
         {

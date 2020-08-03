@@ -17,7 +17,7 @@ const Burger= (props)=>
         );
     }).reduce((arr1d,iter)=> {
         return arr1d.concat(iter);},[]);
-    console.log(ingredientListJSX);
+    // console.log(ingredientListJSX);
     if(ingredientListJSX.length===0)
     {
         ingredientListJSX=<p>Please start adding ingredients</p>
