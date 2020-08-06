@@ -2,17 +2,18 @@ import React ,{Component} from 'react';
 import CheckoutSummary from '../../CheckoutSummary/CheckoutSummary';
 import ContactData from '../../components/ContactData/ContactData';
 import {Route} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 
 class CheckoutTab extends Component
 {
-    state={
-        ingredient:{salad:0,
-            bacon:2,
-            cheese:0,
-            meat:0},
-        totalPrice:0,
-    };
+    // state={
+    //     ingredient:{salad:0,
+    //         bacon:2,
+    //         cheese:0,
+    //         meat:0},
+    //     totalPrice:0,
+    // };
 
 
     cancelClickHandler = ()=>
@@ -26,40 +27,40 @@ class CheckoutTab extends Component
         // console.log("form tp be displayed");
         this.props.history.push("/checkout/form");
     }
-    componentDidMount()
-    {
-        // console.log(this.props);
-        const query=new URLSearchParams(this.props.location.search)
-        // console.log(query);
-        const ingredient={}
-        let totalPrice=0;
-        totalPrice=+query.get('price');
-        for(let p of query)
-        {
-            // console.log(p);
-            if(p[0]==='price')
-                break;
-            ingredient[p[0]]=+p[1];
+    // componentDidMount()
+    // {
+    //     // console.log(this.props);
+    //     const query=new URLSearchParams(this.props.location.search)
+    //     // console.log(query);
+    //     const ingredient={}
+    //     let totalPrice=0;
+    //     totalPrice=+query.get('price');
+    //     for(let p of query)
+    //     {
+    //         // console.log(p);
+    //         if(p[0]==='price')
+    //             break;
+    //         ingredient[p[0]]=+p[1];
             
-        }
-        // console.log(ingredient);
-        this.setState({ingredient:ingredient,
-                        totalPrice:totalPrice},()=>{
-                            // console.log(this.state.ingredient);
-                            // console.log(this.state.totalPrice);
-                        });
-        // console.log(this.state);
+    //     }
+    //     // console.log(ingredient);
+    //     this.setState({ingredient:ingredient,
+    //                     totalPrice:totalPrice},()=>{
+    //                         // console.log(this.state.ingredient);
+    //                         // console.log(this.state.totalPrice);
+    //                     });
+    //     // console.log(this.state);
         
-    }
+    // }
     render(){
         return(
         <div>
-            <CheckoutSummary ingredient={this.state.ingredient} price={this.state.totalPrice}
+            <CheckoutSummary ingredient={this.props.ingredient} price={this.props.totalPrice}
             cancelClicked={this.cancelClickHandler}
             continueClicked={this.continueClickHandler}></CheckoutSummary>
             <Route path="/checkout/form" render={()=>{
                 return(
-                <ContactData ingredient={this.state.ingredient} price={this.state.totalPrice}/>);
+                <ContactData ingredient={this.props.ingredient} price={this.props.totalPrice}/>);
             }}>
 
             </Route>
@@ -68,5 +69,13 @@ class CheckoutTab extends Component
     }
 }
 
+const mapStateToProps=(state)=>{
+    return(
+    {ingredient:state.ingredient,
+    totalPrice:state.totalPrice})
+}
 
-export default CheckoutTab;
+
+
+
+export default connect(mapStateToProps)(CheckoutTab);

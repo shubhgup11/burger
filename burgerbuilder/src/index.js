@@ -7,14 +7,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from'axios';
 import { BrowserRouter } from 'react-router-dom';
 
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import reducer from './store/reducer';
 axios.defaults.baseURL='https://burger-app-testt.firebaseio.com/';
 
+
+const store =createStore(reducer);
 ReactDOM.render(
+  <Provider store={store}>
   <React.StrictMode>
     <BrowserRouter>
     <App />
     </BrowserRouter>
-  </React.StrictMode>,
+  </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 

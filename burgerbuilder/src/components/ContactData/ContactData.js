@@ -4,6 +4,7 @@ import classes from './ContactData.module.css';
 import axios from'axios';
 import LoadSpinner from '../../LoadSpinner/LoadSpinner';
 import Input from '../../UI/Input/Input';
+import {withRouter} from 'react-router-dom';
 
 class ContactData extends Component
 {
@@ -109,6 +110,7 @@ class ContactData extends Component
                 {
                     return {loading:false};
                 });
+                this.props.history.push("/");
             }
         ).catch((error)=>{
             console.log(error);
@@ -139,6 +141,7 @@ class ContactData extends Component
     changeHandler=((event,key)=>
     {
         // console.log(event.target.value);
+        // console.log('hello',this.props);
 
         let updatedFormElements={...this.state.formElements};
         let updatedEle={...updatedFormElements[key]};
@@ -156,6 +159,7 @@ class ContactData extends Component
         }
         this.setState({isvalid:updatedVailidity},()=>{
             console.log('form validity'+this.state.isvalid);
+            // console.log("hey");
         });
         });
         
@@ -168,6 +172,8 @@ class ContactData extends Component
 
     render()
     {
+        // console.log("adj");
+        console.log(this.props);
         let formJSX=null;
         let inputList=[];
         for(let key in this.state.formElements){
@@ -202,6 +208,7 @@ class ContactData extends Component
             </form>);
         }
         return(
+            
             <div className={classes.ContactData}>
                 <h4>Enter your contact Data</h4>
                 {formJSX}
@@ -210,4 +217,4 @@ class ContactData extends Component
     }
 }
 
-export default ContactData;
+export default withRouter(ContactData);
